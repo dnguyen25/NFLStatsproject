@@ -9,15 +9,44 @@ Here, we attempt to predict a prospect's contribution to their respective team o
 
  
 
-
-
 # Proposed approach to modeling prospect contribution
 
 
 # Data cleaning, processing, and exploratory data analysis
+Combine Dataset - After reading in the combine performance data, we noticed that some cleaning/ processing would be necessary. These included the following: 
+    * Removing duplicates
+    * Removing very low count positions such as Kicker, Punter, and Long Snappers
+    * Lowering the amount of player positions (25 initially) to be more accurate and applicable to the entire dataset
+        - This was accomplished by merging positions usually considered similar listed here:
+            *Defensive Backs - SS, FS, S, DB as DB
+            *Interior Offensive Line - C, G, OG, OL as IOL
+            *Tight End/Fullback - TE, FB as TE/FB
+            *Defensive Tackle - NT as DT
+            *Interior LineBacker - LB as ILB
+            *Defensive End - EDGE as DE
+    This narrows the data to 12 positions which is more accurate and makes for easier visualization when plotting variables
+
+    * Removing Undrafted Free Agents
+    *Calculating percentage of missing data for informing interpolation
+        -NA %s as follows: 40 yd dash (1.1%), Vertical Jump (20.42%), Bench Press (29.77%), Broad Jump (21.18%), Cone Drill (33.14%), Shuttle Drill (32.3%)
+
+After cleaning the data, we used matplotlib to create box plots for each combine measurement/exercise grouped by position to visualize averages and outliers.
+
+Draft Picks Dataset - The primary alteration needed for this dataset was to retain the same Position group naming used in the combine data set, so the same Position changes listed above were used here. This dataset does not contain many quantitative variables, but we did uncover some interesting findings:
+    * The 3 most frequent position drafted in this dataset were Defensive Back (839), Wide Receiver (619), and Inside Linebacker (543). It is likely that the common lumping of both Safety positions and nickel cornerback into DBs led to this being the most frequent position
+
+    *62% of first round picks selected in this dataset have been a Pro Bowler or All Pro at least once (a good proxy for success in the NFL, but limited number of selections can exclude other top performers)
+
+    *Only 12.5% of the entire dataset has been at least a one time Pro Bowler or All Pro; showing both the importance of first round picks having a high ratio and the difficulty to be a top performer in the NFL.
+
+
+
+
+
 
 
 # Resulting model performance
 
 
 # Potential shortcomings and how to improve our approach
+The performance of our approach to model player contribution based on draft pick selection and combine results was (Great? Terrible?)
