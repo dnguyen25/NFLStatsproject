@@ -55,7 +55,7 @@ We were unfortunately disappointed with the overall performance of the model. Th
 
 ## Potential shortcomings and how to improve our approach
 
-The performance of our approach to model player contribution based on draft pick selection and combine results was poor. I suspect that the failure of the models on the testing set was due to insufficient testing data size; with data counts for each position only in the dozens, the noise overwhelemed any potential correlation the model could discover. I further am lead to believe this, because the discovered trends in the data match prior expectations (for example, they showed a strong correlation between forty times and WR performance.) However the largest issue is the great deal of inherent uncertainty in player developement and success.
+The performance of our approach to model player contribution based on draft pick selection and combine results was poor. We suspect that the failure of the models on the testing set was due to insufficient testing data size; with data counts for each position only in the dozens, the noise overwhelemed any potential correlation the model could discover. We are further led to believe this because the discovered trends in the data match prior expectations (for example, they showed a strong correlation between forty times and WR performance.) However the largest issue is the great deal of inherent uncertainty in player developement and success.
 
 Issues we came across include:
 
