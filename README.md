@@ -9,55 +9,61 @@ Here, we attempt to predict a prospect's contribution to their respective team o
 
  
 
-# Proposed approach to modeling prospect contribution
+## Proposed approach to modeling prospect contribution
 
 
-# Data cleaning, processing, and exploratory data analysis
-*(Combine Dataset)* After reading in the combine performance data, we noticed that some cleaning/ processing would be necessary. These included the following: 
-    - Removing duplicates
-    - Removing Undrafted Free Agents (We only focus on drafted players)
-    - Calculating percentage of missing data for informing interpolation
-        - NA %s as follows: 40 yd dash (1.1%), Vertical Jump (20.42%), Bench Press (29.77%), Broad Jump (21.18%), Cone Drill (33.14%), Shuttle Drill (32.3%)
-    - Removing very low count positions such as Kicker, Punter, and Long Snappers
-    - Lowering the amount of player positions (25 initially) to be more accurate and applicable to the entire dataset
-        - This was accomplished by merging positions usually considered similar listed here:
-            - Defensive Backs - SS, FS, S, DB as DB
-            - Interior Offensive Line - C, G, OG, OL as IOL
-            - Tight End/Fullback - TE, FB as TE/FB
-            - Defensive Tackle - NT as DT
-            - Interior LineBacker - LB as ILB
-            - Defensive End - EDGE as DE
-    This narrows the data to 12 positions which is more accurate and makes for easier visualization when plotting variables
+## Data cleaning, processing, and exploratory data analysis
 
+(Combine Dataset) After reading in the combine performance data, we noticed that some cleaning/ processing would be necessary. These included the following: 
+
+- Removing duplicates
+- Removing Undrafted Free Agents (We only focus on drafted players)
+- Calculating percentage of missing data for informing interpolation
+- NA %s as follows: 40 yd dash (1.1%), Vertical Jump (20.42%), Bench Press (29.77%), Broad Jump (21.18%), Cone Drill (33.14%), Shuttle Drill (32.3%)
+- Removing very low count positions such as Kicker, Punter, and Long Snappers
+- Lowering the amount of player positions (25 initially) to be more accurate and applicable to the entire dataset. This was accomplished by merging positions usually considered similar listed here:
+  - Defensive Backs - SS, FS, S, DB as DB
+  - Interior Offensive Line - C, G, OG, OL as IOL
+  - Tight End/Fullback - TE, FB as TE/FB
+  - Defensive Tackle - NT as DT
+  - Interior LineBacker - LB as ILB
+  - Defensive End - EDGE as DE
+            
+This narrows the data to 12 positions which is more accurate and makes for easier visualization when plotting variables. 
 
 After cleaning the data, we used matplotlib to create box plots for each combine measurement/exercise grouped by position to visualize averages and outliers.
 
-Draft Picks Dataset - The primary alteration needed for this dataset was to retain the same Position group naming used in the combine data set, so the same Position changes listed above were used here. This dataset does not contain many quantitative variables, but we did uncover some interesting findings:
-    - The 3 most frequent position drafted in this dataset were Defensive Back (839), Wide Receiver (619), and Inside Linebacker (543). It is likely that the common lumping of both Safety positions and nickel cornerback into DBs led to this being the most frequent position
 
-    - 62% of first round picks selected in this dataset have been a Pro Bowler or All Pro at least once (a good proxy for success in the NFL, but limited number of selections can exclude other top performers)
+(Draft Picks Dataset) The primary alteration needed for this dataset was to retain the same Position group naming used in the combine data set, so the same Position changes listed above were used here. This dataset does not contain many quantitative variables, but we did uncover some interesting findings:
 
-    - Only 12.5% of the entire dataset has been at least a one time Pro Bowler or All Pro; showing both the importance of first round picks having a high ratio and the difficulty to be a top performer in the NFL.
+- The 3 most frequent position drafted in this dataset were Defensive Back (839), Wide Receiver (619), and Inside Linebacker (543). It is likely that the common lumping of both Safety positions and nickel cornerback into DBs led to this being the most frequent position
 
+- 62% of first round picks selected in this dataset have been a Pro Bowler or All Pro at least once (a good proxy for success in the NFL, but limited number of selections can exclude other top performers)
 
-
-
+- Only 12.5% of the entire dataset has been at least a one time Pro Bowler or All Pro; showing both the importance of first round picks having a high ratio and the difficulty to be a top performer in the NFL.
 
 
-# Resulting model performance and implications of results
 
 
-# Potential shortcomings and how to improve our approach
+
+
+## Resulting model performance and implications of results
+
+
+## Potential shortcomings and how to improve our approach
+
 The performance of our approach to model player contribution based on draft pick selection and combine results was (Great? Terrible?)
 
-Issues we came across include: 
-    - Interpolating combine data when missing
-    - Inaccurate modeling due to inherent draft positional value
-    - Having more features to allow for more accurate predictions
-    - Innaccessible on-the-field based metrics which could provide new insights into actual player performance
-    - The difficulty associated with quantitatively assessing player performance as football is a complicated game.
+Issues we came across include:
 
-Improvements for future research: 
-    - Get more complete, higher detailed data
-    - Incorporate collegiate and professional on-field performance for predictive modeling
-    - Use a wide variety of modeling approaches to compare against each other. 
+- Interpolating combine data when missing
+- Inaccurate modeling due to inherent draft positional value
+- Having more features to allow for more accurate predictions
+- Innaccessible on-the-field based metrics which could provide new insights into actual player performance
+- The difficulty associated with quantitatively assessing player performance as football is a complicated game.
+
+Improvements for future research:
+
+- Get more complete, higher detailed data
+- Incorporate collegiate and professional on-field performance for predictive modeling
+- Use a wide variety of modeling approaches to compare against each other. 
