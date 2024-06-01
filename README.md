@@ -11,7 +11,7 @@ Here, we attempt to predict a prospect's contribution to their respective team o
 
 ## Proposed approach to modeling prospect contribution
 
-We plan to measure the success of a draft prospect in two ways. First, by measuring the drafting team's performance as measured by PFR's SRS, a strength of schedule and scoring based metric. In this case, we will need to include the SRS of the team the year the player was drafted into the model, to account for regression to the mean. Secondly, we will measure the players individual success by using PFR's DrAV metric for career performance with the drafting team. We would like to construct both a pre draft and post draft model, factoring in how high the player was drafted. For each of these, it will be necessary to break down the model by player position. We intend to use a Poisson linear regression because preliminary data analysis shows that player contribution is left skewed; most draft pisks contribute nothing, while some contribute a lot. 
+We plan to measure the success of a draft prospect in two ways. First, by measuring the drafting team's performance as measured by PFR's SRS, a strength of schedule and scoring based metric. In this case, we will need to include the SRS of the team the year the player was drafted into the model, to account for regression to the mean. Secondly, we will measure the players individual success by using PFR's DrAV metric for career performance with the drafting team. We would like to construct both a pre draft and post draft model, factoring in how high the player was drafted. For each of these, it will be necessary to break down the model by player position. We intend to use a Poisson linear regression because preliminary data analysis shows that player contribution is left skewed; most draft pisks contribute nothing, while some contribute a lot. Additionaly, we are building a kNN model for draft position based on combine data and broken down by position. We plan to scale the data because the feature variables have different units and scales.
 
 ## Data cleaning, processing, and exploratory data analysis
 
@@ -50,7 +50,22 @@ After cleaning the data, we used matplotlib to create box plots for each combine
 
 ## Resulting model performance and implications of results
 
-We were unfortunately disappointed with the overall performance of the model. The SRS metric turned out to be impossible to predict based on combined data and showed only a weak correlation with the draft pick. This likely implies that draft picks have only a small impact on team improvement and that regression to the mean is more important. As a conclusion, it seems likely that teams overvalue draft picks in team building. We had more success with the DrAV metric, however only about 3%-5% of the variation in prospect success could be explained by combine data and this effect was almost negligible on testing data. We were successful at some side projects using the data. We were able to determine the value of a draft pick in terms of DrAV with a strong correlation. This allowed us to determine the relative value of drafting various positions. In particular, we found that, unsuprisingly, quarterbacks are the best player to draft early but we also found that offensive linemen are underdrafted relative to their overall value. On the other hand defensive backs and tight ends are typically overdrafted.
+We were unfortunately disappointed with the overall performance of the model. The SRS metric turned out to be impossible to predict based on combined data and showed only a weak correlation with the draft pick. This likely implies that draft picks have only a small impact on team improvement and that regression to the mean is more important. As a conclusion, it seems likely that teams overvalue draft picks in team building. The model for player performance also had small to negligible improvements in predicting DrAV from the base model on testing data. This suggests that there is some contribution to player performance based on combine data, but it is so small that teams should place low emphasis on combine statistics when making draft decisions. The mean Poisson deviation of the model compared to a base model (which simply outputs the mean) for each position is given below.
+
+
+|     |QB |RB |WR |TE |OL |DE |DT |LB |DB |
+|---|---|---|---|---|---|---|---|---|---|
+|Base|26.2|13.2|15.1|8.1|11.3|18.9|12.5|11.7|7.4|
+|Constructed|25.5|12.9|14.9|8.0|10.6|13.1|11.4|11.5|7.4|
+
+The model for draft position confirms that, currently, combine statistics do influence teams' decisions, however it only accounts for a small portion (<10%) of variation in draft position as measured by mean squared error. Players and analysts should keep this in mind when adjusting expectations based on combine data. The mean squared error for this model compared to a base model is:
+
+|     |QB |RB |WR |TE |OL |DE |DT |LB |DB |
+|---|---|---|---|---|---|---|---|---|---|
+|Base|7.15|4.93|5.24|4.61|5.44|5.99|5.71|4.84|4.84|
+|Constructed|7.16|4.01|5.10|3.96|5.11|5.24|5.52|4.43|4.31|
+
+We were successful at some side projects using the data. We were able to determine the value of a draft pick in terms of DrAV with a strong correlation. This allowed us to determine the relative value of drafting various positions. In particular, we found that, unsuprisingly, quarterbacks are the best player to draft early but we also found that offensive linemen are underdrafted relative to their overall value. On the other hand defensive backs and tight ends are typically overdrafted.
 
 
 ## Potential for Improvements
